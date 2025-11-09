@@ -1,0 +1,5 @@
+main_page_burger_url = "https://stellarburgers.education-services.ru/login"
+base_url = "https://stellarburgers.education-services.ru"
+create_change_user_data_url_or_delete = f"{base_url}/api/auth/user"
+create_user_url = f"{base_url}/api/auth/register"
+login_user_url = f"{base_url}/api/auth/login"
