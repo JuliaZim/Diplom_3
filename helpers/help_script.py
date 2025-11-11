@@ -4,16 +4,19 @@ from faker import Faker
 import allure
 
 
-
 fake = Faker()
 
 
 @allure.step("Создание юзера")
 def create_user():
     attempts = 0
-    while attempts < 5:
+    while attempts < 10:
         try:
-            payload = {"name": fake.name(), "email": fake.email(), "password": fake.password()}
+            payload = {
+                "name": fake.name(),
+                "email": fake.email(),
+                "password": fake.password(),
+            }
             response = requests.post(urls.create_user_url, data=payload)
             response_value = response.json()
             if response.status_code == 200:
@@ -21,15 +24,16 @@ def create_user():
                     payload["email"],
                     payload["password"],
                     payload["name"],
-                    response_value["accessToken"]
+                    response_value["accessToken"],
                 )
             else:
                 print("Пользователь уже существует. Повторная попытка...")
                 attempts += 1
         except Exception as e:
-                    print(f"Произошла ошибка: {e}")
-                    attempts += 1
-        print("Не удалось создать пользователя после 3 попыток.")
+            print(f"Произошла ошибка: {e}")
+            attempts += 1
+        print("Не удалось создать пользователя после 10 попыток.")
+
 
 @allure.step("Удаление юзера")
 def delete_user(name, email, token):
@@ -44,7 +48,7 @@ def delete_user(name, email, token):
 @allure.step("Логин юзера")
 def create_and_login_user():
     attempts = 0
-    while attempts < 5:
+    while attempts < 10:
         try:
             email, password, name, create_response = create_user()
             if create_response is not None:
@@ -60,7 +64,8 @@ def create_and_login_user():
         except Exception as e:
             print(f"Произошла ошибка: {e}")
             attempts += 1
-    print("Не удалось создать пользователя после 3 попыток.")
+    print("Не удалось создать пользователя после 10 попыток.")
+
 
 DND_JS = """
 const src = arguments[0];

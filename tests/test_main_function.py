@@ -20,7 +20,7 @@ class TestMainFunction:
         main_page.click_constructor_button()
         header = main_page.wait_header_visible()
         assert header.is_displayed()
-        help_script.delete_user(email, name, token)
+
 
     @allure.title("Проверка клика на кнопку Лента Заказов")
     @allure.description(
@@ -36,7 +36,6 @@ class TestMainFunction:
         header = orders_list.wait_headers_visible()
         assert '/feed' in current_url
         assert header.is_displayed()
-        help_script.delete_user(email, name, token)
 
     @allure.title("Проверка клика на ингредиент")
     @allure.description(
@@ -49,7 +48,7 @@ class TestMainFunction:
         main_page.click_ingredient_button()
         modal = main_page.wait_ingredient_modal_visible()
         assert modal.is_displayed()
-        help_script.delete_user(email, name, token)
+
 
     @allure.title("Проверка закрытия модального окна с деталями ингредиета")
     @allure.description(
@@ -63,7 +62,7 @@ class TestMainFunction:
         main_page.click_close_modal_button()
         modal = main_page.wait_ingredient_modal_invisible()
         assert not modal.is_displayed()
-        help_script.delete_user(email, name, token)
+
     
     @allure.title("Проверка каунтера ингредиента")
     @allure.description(
@@ -77,7 +76,6 @@ class TestMainFunction:
         main_page.drag_first_bun_to_constructor()
         counter_value_1 = main_page.find_counter().text
         assert int(counter_value_1) ==  int(counter_value_0) + 2
-        help_script.delete_user(email, name, token)
         
     @allure.title("Проверка создания заказа")
     @allure.description(
@@ -92,4 +90,3 @@ class TestMainFunction:
         main_page.click_create_order_button()
         modal = main_page.wait_succes_order_modal()
         assert modal.is_displayed()
-        help_script.delete_user(email, name, token)

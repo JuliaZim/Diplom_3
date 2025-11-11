@@ -1,6 +1,5 @@
 from page.auth_page import AuthPage
 from faker import Faker
-from helpers import help_script
 import allure
 
 fake = Faker()
@@ -23,7 +22,6 @@ class TestPersonalAccount:
         assert name_input.is_displayed()
         assert login_input.is_displayed()
         assert password_input.is_displayed()
-        help_script.delete_user(email, name, token)
 
     @allure.title("Проверка перехода в историю заказов")
     @allure.description(
@@ -36,7 +34,6 @@ class TestPersonalAccount:
         personal_page.click_order_history_button()
         current_url = personal_page.get_current_url()
         assert '/account/order-history' in current_url
-        help_script.delete_user(email, name, token)
 
     @allure.title("Проверка выхода из аккаунта")
     @allure.description(
@@ -52,7 +49,3 @@ class TestPersonalAccount:
         email_input = auth_page.wait_email_input_be_clickable()
         assert header.is_displayed()
         assert email_input.is_displayed()
-        help_script.delete_user(email, name, token)
-
-
-
