@@ -23,7 +23,8 @@ def main_page(driver):
         auth_page = AuthPage(driver)
         auth_page.login(email, password)
         main_page = MainPage(driver)
-        return main_page, email, name, token
+        yield main_page, email, name, token
+        help_script.delete_user(name, email, token)
 
 @allure.step("перенход на страницу Личный кабинет")
 @pytest.fixture(scope='function')
